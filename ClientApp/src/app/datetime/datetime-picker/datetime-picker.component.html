@@ -1,0 +1,17 @@
+﻿<mat-form-field appearance="outline" class="mat-form-field-datepicker" id="DatePickerComponent">
+    <mat-label>Choose a datetime</mat-label>
+    <input matInput
+           [ngxMatDatetimePicker]="StartDatePicker"
+           placeholder="Choose a datetime"
+           formControlName="dateControl"
+           id="PrSpins-StartDate" />
+
+    <mat-datepicker-toggle matSuffix
+                           [for]="StartDatePicker"
+                           id="PrSpins-StartDatePicker-toggle">
+    </mat-datepicker-toggle>
+
+    <ngx-mat-datetime-picker #StartDatePicker
+                             id="PrSpins-StartDatePicker">
+    </ngx-mat-datetime-picker>
+</mat-form-field>

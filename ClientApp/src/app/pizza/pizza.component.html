@@ -1,0 +1,64 @@
+<p>Order your Pizza</p>
+<form novalidate [formGroup]="PizzaForm.form">
+  <div class="grid-3-columns">
+    <!--Row 1-->
+    <app-input-simple label="First Name"
+                      [parentForm]="PizzaForm.form"
+                      fieldName="firstName"
+                      inputId="firstName"
+                      type="text"
+                      labelId="firstNameLabel">
+    </app-input-simple>
+    <app-input-simple label="Last Name"
+                      [parentForm]="PizzaForm.form"
+                      fieldName="lastName"
+                      inputId="lastName"
+                      type="text"
+                      labelId="lastNameLabel">
+    </app-input-simple>
+
+    <mat-form-field appearance="outline" class="mat-form-field-datepicker">
+      <mat-label >Order Date</mat-label>
+      <input matInput [max]="PizzaForm.today"
+             [ngxMatDatetimePicker]="dtgCreatedPicker"
+             placeholder="Order Date"
+             formControlName="OrderWhen" />
+
+      <mat-datepicker-toggle matSuffix
+                             [for]="dtgCreatedPicker">
+      </mat-datepicker-toggle>
+      <ngx-mat-datetime-picker #dtgCreatedPicker>
+      </ngx-mat-datetime-picker>
+     
+    </mat-form-field>
+
+    <!--ROW 2-->
+    <mat-form-field appearance="fill">
+      <mat-label >Crust</mat-label>
+      <mat-select type="text" formControlName="CrustId" >
+        <mat-option value="">Select Crust</mat-option>
+        <mat-option *ngFor="let crust of Crusts$ | async" value="{{crust.Id}}">{{crust.Name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label >Topping 1</mat-label>
+      <mat-select type="text" formControlName="Topping1Id" >
+        <mat-option value="">Select Topping</mat-option>
+        <mat-option *ngFor="let topping of Toppings$ | async" value="{{topping.Id}}">{{topping.Name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Topping 2</mat-label>
+      <mat-select type="text" formControlName="Topping2Id">
+        <mat-option value="">Select Topping</mat-option>
+        <mat-option *ngFor="let topping of Toppings$ | async" value="{{topping.Id}}">{{topping.Name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!--Row 3-->
+    <mat-checkbox formControlName="WantDelivered" >Validated</mat-checkbox>
+    <button mat-button (click)="saveAndRedirect()" [disabled]="PizzaForm.form.invalid">Save Order</button>
+  </div>
+</form>
